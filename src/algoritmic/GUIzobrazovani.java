@@ -5,6 +5,10 @@
  */
 package algoritmic;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Martin
@@ -15,12 +19,18 @@ public class GUIzobrazovani extends javax.swing.JFrame {
 
     /**
      * Creates new form GUIzobrazovani
-     * @param algoritmus
+     *
+     * @param algoritmus potomek třídy Algoritmus
      */
     public GUIzobrazovani(Algoritmus algoritmus) {
         initComponents();
         this.algoritmus = algoritmus;
-        jLabelNadpis.setText(this.algoritmus.getNazev());
+        nadpisLabel.setText(this.algoritmus.getNazev());
+        aktualizujGUI();
+    }
+
+    private void aktualizujGUI() {
+        //něco
     }
 
     /**
@@ -32,35 +42,87 @@ public class GUIzobrazovani extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButtonKrokVpred = new javax.swing.JButton();
-        jButtonKrokVzad = new javax.swing.JButton();
-        jButtonNaZacatek = new javax.swing.JButton();
-        jButtonNaKonec = new javax.swing.JButton();
-        jLabelNadpis = new javax.swing.JLabel();
+        ovladaniPanel = new javax.swing.JPanel();
+        krokVpredButton = new javax.swing.JButton();
+        krokVzadButton = new javax.swing.JButton();
+        naZacatekButton = new javax.swing.JButton();
+        naKonecButton = new javax.swing.JButton();
+        nadpisLabel = new javax.swing.JLabel();
+        pseudokodPanel = new javax.swing.JPanel();
+        hlavniPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButtonKrokVpred.setText("krok vpřed");
-        jPanel1.add(jButtonKrokVpred);
+        krokVpredButton.setText("krok vpřed");
+        krokVpredButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                krokVpredButtonActionPerformed(evt);
+            }
+        });
+        ovladaniPanel.add(krokVpredButton);
 
-        jButtonKrokVzad.setText("krok vzad");
-        jPanel1.add(jButtonKrokVzad);
+        krokVzadButton.setText("krok vzad");
+        krokVzadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                krokVzadButtonActionPerformed(evt);
+            }
+        });
+        ovladaniPanel.add(krokVzadButton);
 
-        jButtonNaZacatek.setText("na začátek");
-        jPanel1.add(jButtonNaZacatek);
+        naZacatekButton.setText("na začátek");
+        naZacatekButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                naZacatekButtonActionPerformed(evt);
+            }
+        });
+        ovladaniPanel.add(naZacatekButton);
 
-        jButtonNaKonec.setText("na konec");
-        jPanel1.add(jButtonNaKonec);
+        naKonecButton.setText("na konec");
+        naKonecButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                naKonecButtonActionPerformed(evt);
+            }
+        });
+        ovladaniPanel.add(naKonecButton);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(ovladaniPanel, java.awt.BorderLayout.PAGE_END);
 
-        jLabelNadpis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelNadpis.setText("Pokus");
-        getContentPane().add(jLabelNadpis, java.awt.BorderLayout.PAGE_START);
+        nadpisLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nadpisLabel.setText("Pokus");
+        getContentPane().add(nadpisLabel, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(pseudokodPanel, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(hlavniPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void krokVpredButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_krokVpredButtonActionPerformed
+        algoritmus.krokVpred();
+        aktualizujGUI();
+    }//GEN-LAST:event_krokVpredButtonActionPerformed
+
+    private void krokVzadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_krokVzadButtonActionPerformed
+        int novyKrok = algoritmus.krok - 1;
+        naZacatekButtonActionPerformed(null);
+        while (algoritmus.krok < novyKrok) {
+            krokVpredButtonActionPerformed(null);
+        }
+        aktualizujGUI();
+    }//GEN-LAST:event_krokVzadButtonActionPerformed
+
+    private void naZacatekButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naZacatekButtonActionPerformed
+        try {
+            algoritmus = (Algoritmus) algoritmus.getClass().getConstructors()[0].newInstance(algoritmus.getPuvodniPosloupnost(), (Integer) algoritmus.getPrvek());
+            aktualizujGUI();
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(GUIzobrazovani.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_naZacatekButtonActionPerformed
+
+    private void naKonecButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naKonecButtonActionPerformed
+        algoritmus.naKonec();
+        aktualizujGUI();
+    }//GEN-LAST:event_naKonecButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -98,11 +160,13 @@ public class GUIzobrazovani extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonKrokVpred;
-    private javax.swing.JButton jButtonKrokVzad;
-    private javax.swing.JButton jButtonNaKonec;
-    private javax.swing.JButton jButtonNaZacatek;
-    private javax.swing.JLabel jLabelNadpis;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel hlavniPanel;
+    private javax.swing.JButton krokVpredButton;
+    private javax.swing.JButton krokVzadButton;
+    private javax.swing.JButton naKonecButton;
+    private javax.swing.JButton naZacatekButton;
+    private javax.swing.JLabel nadpisLabel;
+    private javax.swing.JPanel ovladaniPanel;
+    private javax.swing.JPanel pseudokodPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,20 +11,26 @@ package algoritmic;
  */
 public abstract class Algoritmus {
 
-    protected int[] posloupnost;
-    protected int prvek;
+    protected final int[] puvodniPosloupnost;
+    protected final int prvek;
     protected String nazev;
     protected int krok;
+    protected String[] komentareKroku;
 
-    public Algoritmus(int[] posloupnost, int prvek, String nazev) {
-        this.posloupnost = posloupnost;
+    public Algoritmus(int[] posloupnost, int prvek) {
+        this.puvodniPosloupnost = posloupnost;
         this.prvek = prvek;
-        this.nazev = nazev;
         this.krok = 0;
     }
 
-    public int[] getPosloupnost() {
-        return posloupnost;
+    public void krokVpred() {
+    }
+
+    public void naKonec() {
+    }
+
+    public int[] getPuvodniPosloupnost() {
+        return puvodniPosloupnost;
     }
 
     public int getPrvek() {

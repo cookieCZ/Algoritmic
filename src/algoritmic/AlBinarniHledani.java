@@ -9,10 +9,15 @@ package algoritmic;
  *
  * @author Martin
  */
-public class AlBinarniHledani extends Algoritmus{
+public class AlBinarniHledani extends Algoritmus {
 
     public AlBinarniHledani(int[] posloupnost, int prvek) {
-        super(posloupnost, prvek, "Binární hledání");
+        super(posloupnost, prvek);
+        this.nazev = "Binární hledání";
+        this.komentareKroku = new String[]{
+            "Seřazení posloupnosti",
+            "Porovnání hledaného prvku s prostředním prvkem"
+        };
     }
-    
+
 }

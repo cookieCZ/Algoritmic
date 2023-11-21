@@ -112,7 +112,7 @@ public class GUIvolba extends javax.swing.JFrame {
             }
         }
 
-        int[] posloupnost = null;
+        int[] posloupnost;
         input = jTextFieldPosloupnost.getText();
         if (input.isBlank()) {
             Random random = new Random();
@@ -141,6 +141,7 @@ public class GUIvolba extends javax.swing.JFrame {
         }
 
         new GUIzobrazovani(alg).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
