@@ -6,8 +6,12 @@
 package algoritmic;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import javax.swing.JFrame;
 
 /**
  *
@@ -24,13 +28,15 @@ public class GUIzobrazovani extends javax.swing.JFrame {
      */
     public GUIzobrazovani(Algoritmus algoritmus) {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.algoritmus = algoritmus;
         nadpisLabel.setText(this.algoritmus.getNazev());
+        pseudokodLabel.setText("<html>" + Arrays.stream(algoritmus.getPseudokod()).collect(Collectors.joining("<br>")) + "</html>");
         aktualizujGUI();
     }
 
     private void aktualizujGUI() {
-        //něco
+        krokyLabel.setText("<html>" + algoritmus.getKomentareKroku().stream().map(x -> x.getCislo() + ". krok:\t\t" + Arrays.toString(x.getPosloupnost()) + "\t\t\t\t\t" + x.getKomentar()).collect(Collectors.joining("<br><br>")) + "</html>");
     }
 
     /**
@@ -49,11 +55,17 @@ public class GUIzobrazovani extends javax.swing.JFrame {
         naKonecButton = new javax.swing.JButton();
         nadpisLabel = new javax.swing.JLabel();
         pseudokodPanel = new javax.swing.JPanel();
+        pseudokodLabel = new javax.swing.JLabel();
         hlavniPanel = new javax.swing.JPanel();
+        krokyLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        krokVpredButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         krokVpredButton.setText("krok vpřed");
+        krokVpredButton.setMaximumSize(new java.awt.Dimension(150, 50));
+        krokVpredButton.setMinimumSize(new java.awt.Dimension(150, 50));
+        krokVpredButton.setPreferredSize(new java.awt.Dimension(150, 50));
         krokVpredButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 krokVpredButtonActionPerformed(evt);
@@ -61,7 +73,11 @@ public class GUIzobrazovani extends javax.swing.JFrame {
         });
         ovladaniPanel.add(krokVpredButton);
 
+        krokVzadButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         krokVzadButton.setText("krok vzad");
+        krokVzadButton.setMaximumSize(new java.awt.Dimension(150, 50));
+        krokVzadButton.setMinimumSize(new java.awt.Dimension(150, 50));
+        krokVzadButton.setPreferredSize(new java.awt.Dimension(150, 50));
         krokVzadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 krokVzadButtonActionPerformed(evt);
@@ -69,7 +85,11 @@ public class GUIzobrazovani extends javax.swing.JFrame {
         });
         ovladaniPanel.add(krokVzadButton);
 
+        naZacatekButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         naZacatekButton.setText("na začátek");
+        naZacatekButton.setMaximumSize(new java.awt.Dimension(150, 50));
+        naZacatekButton.setMinimumSize(new java.awt.Dimension(150, 50));
+        naZacatekButton.setPreferredSize(new java.awt.Dimension(150, 50));
         naZacatekButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 naZacatekButtonActionPerformed(evt);
@@ -77,7 +97,11 @@ public class GUIzobrazovani extends javax.swing.JFrame {
         });
         ovladaniPanel.add(naZacatekButton);
 
+        naKonecButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         naKonecButton.setText("na konec");
+        naKonecButton.setMaximumSize(new java.awt.Dimension(150, 50));
+        naKonecButton.setMinimumSize(new java.awt.Dimension(150, 50));
+        naKonecButton.setPreferredSize(new java.awt.Dimension(150, 50));
         naKonecButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 naKonecButtonActionPerformed(evt);
@@ -87,10 +111,21 @@ public class GUIzobrazovani extends javax.swing.JFrame {
 
         getContentPane().add(ovladaniPanel, java.awt.BorderLayout.PAGE_END);
 
+        nadpisLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         nadpisLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nadpisLabel.setText("Pokus");
         getContentPane().add(nadpisLabel, java.awt.BorderLayout.PAGE_START);
+
+        pseudokodLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        pseudokodLabel.setText("Pseudokód:");
+        pseudokodPanel.add(pseudokodLabel);
+
         getContentPane().add(pseudokodPanel, java.awt.BorderLayout.LINE_START);
+
+        krokyLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        krokyLabel.setText("Kroky:");
+        hlavniPanel.add(krokyLabel);
+
         getContentPane().add(hlavniPanel, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -102,12 +137,12 @@ public class GUIzobrazovani extends javax.swing.JFrame {
     }//GEN-LAST:event_krokVpredButtonActionPerformed
 
     private void krokVzadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_krokVzadButtonActionPerformed
-        int novyKrok = algoritmus.krok - 1;
+        int novyKrok = algoritmus.getKrok() - 1;
         naZacatekButtonActionPerformed(null);
-        while (algoritmus.krok < novyKrok) {
+        while (algoritmus.getKrok() < novyKrok) {
             krokVpredButtonActionPerformed(null);
         }
-        aktualizujGUI();
+        //aktualizujGUI();
     }//GEN-LAST:event_krokVzadButtonActionPerformed
 
     private void naZacatekButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naZacatekButtonActionPerformed
@@ -163,10 +198,12 @@ public class GUIzobrazovani extends javax.swing.JFrame {
     private javax.swing.JPanel hlavniPanel;
     private javax.swing.JButton krokVpredButton;
     private javax.swing.JButton krokVzadButton;
+    private javax.swing.JLabel krokyLabel;
     private javax.swing.JButton naKonecButton;
     private javax.swing.JButton naZacatekButton;
     private javax.swing.JLabel nadpisLabel;
     private javax.swing.JPanel ovladaniPanel;
+    private javax.swing.JLabel pseudokodLabel;
     private javax.swing.JPanel pseudokodPanel;
     // End of variables declaration//GEN-END:variables
 }

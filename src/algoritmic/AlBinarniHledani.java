@@ -11,13 +11,14 @@ package algoritmic;
  */
 public class AlBinarniHledani extends Algoritmus {
 
+    private String[] komentare = new String[]{
+        "Seřazení posloupnosti",
+        "Porovnání hledaného prvku s prostředním prvkem"
+    };
+
     public AlBinarniHledani(int[] posloupnost, int prvek) {
         super(posloupnost, prvek);
         this.nazev = "Binární hledání";
-        this.komentareKroku = new String[]{
-            "Seřazení posloupnosti",
-            "Porovnání hledaného prvku s prostředním prvkem"
-        };
     }
 
 }
