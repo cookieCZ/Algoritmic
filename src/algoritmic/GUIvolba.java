@@ -137,7 +137,7 @@ public class GUIvolba extends javax.swing.JFrame {
             case 1 ->
                 alg = new AlLinearniHledani(posloupnost, prvek);
             default ->
-                throw new IllegalArgumentException("Špatná hodnota přečtena z: jComboBox1");
+                throw new IllegalArgumentException("Špatná hodnota přečtena v: GUIvolba.jComboBox1");
         }
 
         new GUIzobrazovani(alg).setVisible(true);

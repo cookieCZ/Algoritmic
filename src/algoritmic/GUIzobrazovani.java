@@ -36,7 +36,7 @@ public class GUIzobrazovani extends javax.swing.JFrame {
     }
 
     private void aktualizujGUI() {
-        krokyLabel.setText("<html>" + algoritmus.getKomentareKroku().stream().map(x -> x.getCislo() + ". krok:\t\t" + Arrays.toString(x.getPosloupnost()) + "\t\t\t\t\t" + x.getKomentar()).collect(Collectors.joining("<br><br>")) + "</html>");
+        krokyLabel.setText("<html>" + algoritmus.getKomentareKroku().stream().collect(Collectors.joining("<br>")) + "</html>");
     }
 
     /**
@@ -111,18 +111,18 @@ public class GUIzobrazovani extends javax.swing.JFrame {
 
         getContentPane().add(ovladaniPanel, java.awt.BorderLayout.PAGE_END);
 
-        nadpisLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        nadpisLabel.setFont(new java.awt.Font("Tahoma", 0, 72)); // NOI18N
         nadpisLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nadpisLabel.setText("Pokus");
         getContentPane().add(nadpisLabel, java.awt.BorderLayout.PAGE_START);
 
-        pseudokodLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        pseudokodLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         pseudokodLabel.setText("Pseudokód:");
         pseudokodPanel.add(pseudokodLabel);
 
         getContentPane().add(pseudokodPanel, java.awt.BorderLayout.LINE_START);
 
-        krokyLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        krokyLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         krokyLabel.setText("Kroky:");
         hlavniPanel.add(krokyLabel);
 
@@ -147,7 +147,7 @@ public class GUIzobrazovani extends javax.swing.JFrame {
 
     private void naZacatekButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naZacatekButtonActionPerformed
         try {
-            algoritmus = (Algoritmus) algoritmus.getClass().getConstructors()[0].newInstance(algoritmus.getPuvodniPosloupnost(), (Integer) algoritmus.getPrvek());
+            algoritmus = (Algoritmus) algoritmus.getClass().getConstructors()[0].newInstance(algoritmus.getPosloupnost(), (Integer) algoritmus.getPrvek());
             aktualizujGUI();
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(GUIzobrazovani.class.getName()).log(Level.SEVERE, null, ex);

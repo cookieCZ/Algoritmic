@@ -6,6 +6,7 @@
 package algoritmic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,18 +15,17 @@ import java.util.List;
  */
 public abstract class Algoritmus {
 
-    protected final int[] puvodniPosloupnost;
-    protected int[] aktualniPosloupnost;
+    protected final int[] posloupnost;
     protected final int prvek;
     protected String nazev;
-    protected List<Krok> komentareKroku;
+    protected List<String> komentareKroku;
     protected String[] pseudokod;
 
     public Algoritmus(int[] posloupnost, int prvek) {
-        this.puvodniPosloupnost = posloupnost;
-        this.aktualniPosloupnost = posloupnost;
+        this.posloupnost = posloupnost;
         this.prvek = prvek;
         this.komentareKroku = new ArrayList();
+        this.komentareKroku.add("&emsp;hledaný prvek: " + this.prvek + "&emsp;posloupnost: " + Arrays.toString(this.posloupnost));
     }
 
     public void krokVpred() {
@@ -34,8 +34,8 @@ public abstract class Algoritmus {
     public void naKonec() {
     }
 
-    public int[] getPuvodniPosloupnost() {
-        return puvodniPosloupnost;
+    public int[] getPosloupnost() {
+        return posloupnost;
     }
 
     public int getPrvek() {
@@ -50,7 +50,7 @@ public abstract class Algoritmus {
         return komentareKroku.size();
     }
 
-    public List<Krok> getKomentareKroku() {
+    public List<String> getKomentareKroku() {
         return komentareKroku;
     }
 
