@@ -24,16 +24,22 @@ public class AlLinearniHledani extends Algoritmus {
     public AlLinearniHledani(int[] posloupnost, int prvek) {
         super(posloupnost, prvek);
         this.nazev = "Lineární hledání";
-        this.pseudokod = new String[]{"porovnej", "když nerovná", "tak přesuň", "jinak hotovo"};
+        this.pseudokod = new String[]{
+            "porovnej",
+            "když nerovná",
+            "&ensp;tak přesuň",
+            "&ensp;opakuj od začátku",
+            "&ensp;jinak hotovo"
+        };
     }
 
     private void porovnej() {
         if (posloupnost[zkoumanyIndex] == prvek) {
             dalsiKrok = KROK_KONEC;
-            komentareKroku.add(getKrok() + ". " + posloupnostToString() + " Porovnání hledaného prvku úspěšné, prvek nalezen na indexu: " + zkoumanyIndex);
+            pridejKomentar(posloupnostToString() + " Porovnání hledaného prvku úspěšné, prvek nalezen na indexu: " + zkoumanyIndex);
         } else {
             dalsiKrok = KROK_PRESUN;
-            komentareKroku.add(getKrok() + ". " + posloupnostToString() + " Porovnání hledaného prvku neúspěšné");
+            pridejKomentar(posloupnostToString() + " Porovnání hledaného prvku neúspěšné");
         }
     }
 
@@ -41,10 +47,10 @@ public class AlLinearniHledani extends Algoritmus {
         zkoumanyIndex++;
         if (zkoumanyIndex == posloupnost.length) {
             dalsiKrok = KROK_KONEC;
-            komentareKroku.add(getKrok() + ". Hledaný prvek se v posloupnosti nevyskytuje.");
+            pridejKomentar("Hledaný prvek se v posloupnosti nevyskytuje.");
         } else {
             dalsiKrok = KROK_POROVNEJ;
-            komentareKroku.add(getKrok() + ". " + posloupnostToString() + " Budeme porovnávat hledaný prvek s prvkem na indexu: " + zkoumanyIndex);
+            pridejKomentar(posloupnostToString() + " Budeme porovnávat hledaný prvek s prvkem na indexu: " + zkoumanyIndex);
         }
     }
 

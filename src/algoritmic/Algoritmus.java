@@ -18,7 +18,7 @@ public abstract class Algoritmus {
     protected final int[] posloupnost;
     protected final int prvek;
     protected String nazev;
-    protected List<String> komentareKroku;
+    private List<String> komentareKroku;
     protected String[] pseudokod;
 
     public Algoritmus(int[] posloupnost, int prvek) {
@@ -26,6 +26,10 @@ public abstract class Algoritmus {
         this.prvek = prvek;
         this.komentareKroku = new ArrayList();
         this.komentareKroku.add("&emsp;hledaný prvek: " + this.prvek + "&emsp;posloupnost: " + Arrays.toString(this.posloupnost));
+    }
+
+    protected void pridejKomentar(String komentar) {
+        komentareKroku.add(getKrok() + ". " + komentar);
     }
 
     public void krokVpred() {
