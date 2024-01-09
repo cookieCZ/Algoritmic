@@ -5,10 +5,6 @@
  */
 package algoritmic;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 /**
  *
  * @author Martin
@@ -36,10 +32,10 @@ public class AlLinearniHledani extends Algoritmus {
     private void porovnej() {
         if (posloupnost[zkoumanyIndex] == prvek) {
             dalsiKrok = KROK_KONEC;
-            pridejKomentar(posloupnostToString() + " Porovnání hledaného prvku úspěšné, prvek nalezen na indexu: " + zkoumanyIndex);
+            pridejKomentar(arrayToString() + " Porovnání hledaného prvku úspěšné, prvek nalezen na indexu: " + zkoumanyIndex);
         } else {
             dalsiKrok = KROK_PRESUN;
-            pridejKomentar(posloupnostToString() + " Porovnání hledaného prvku neúspěšné");
+            pridejKomentar(arrayToString() + " Porovnání hledaného prvku neúspěšné");
         }
     }
 
@@ -50,7 +46,7 @@ public class AlLinearniHledani extends Algoritmus {
             pridejKomentar("Hledaný prvek se v posloupnosti nevyskytuje.");
         } else {
             dalsiKrok = KROK_POROVNEJ;
-            pridejKomentar(posloupnostToString() + " Budeme porovnávat hledaný prvek s prvkem na indexu: " + zkoumanyIndex);
+            pridejKomentar(arrayToString() + " Budeme porovnávat hledaný prvek s prvkem na indexu: " + zkoumanyIndex);
         }
     }
 
@@ -62,7 +58,7 @@ public class AlLinearniHledani extends Algoritmus {
     }
 
     @Override
-    public void krokVpred() {
+    public void provedKrok() {
         switch (dalsiKrok) {
             case KROK_KONEC -> {
             }
@@ -75,9 +71,24 @@ public class AlLinearniHledani extends Algoritmus {
         }
     }
 
-    private String posloupnostToString() {
-        return IntStream.range(0, posloupnost.length)
+    @Override
+    protected void zvyrazniPseudokod() {
+        switch (dalsiKrok) {
+            case KROK_KONEC ->
+                zvyraznenyIndexPseudokodu = 4;
+            case KROK_POROVNEJ ->
+                zvyraznenyIndexPseudokodu = 0;
+            case KROK_PRESUN ->
+                zvyraznenyIndexPseudokodu = 2;
+            default -> //chyba
+                throw new IllegalArgumentException("Špatná hodnota přečtena v: AlLinearniHledani.dalsiKrok");
+        }
+    }
+
+    private String arrayToString() {
+        /*return IntStream.range(0, posloupnost.length)
                 .mapToObj(x -> x == zkoumanyIndex ? "<b><em>" + posloupnost[x] + "</em></b>" : posloupnost[x] + "")
-                .collect(Collectors.joining(", ", "[", "]"));
+                .collect(Collectors.joining(", ", "[", "]"));*/
+        return posloupnostToString(posloupnost, zkoumanyIndex);
     }
 }

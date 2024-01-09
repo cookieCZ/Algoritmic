@@ -8,6 +8,8 @@ package algoritmic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -20,6 +22,7 @@ public abstract class Algoritmus {
     protected String nazev;
     private List<String> komentareKroku;
     protected String[] pseudokod;
+    protected int zvyraznenyIndexPseudokodu = 0;
 
     public Algoritmus(int[] posloupnost, int prvek) {
         this.posloupnost = posloupnost;
@@ -28,37 +31,53 @@ public abstract class Algoritmus {
         this.komentareKroku.add("&emsp;hledaný prvek: " + this.prvek + "&emsp;posloupnost: " + Arrays.toString(this.posloupnost));
     }
 
-    protected void pridejKomentar(String komentar) {
+    protected final String posloupnostToString(int[] pole, int zvyraznenyIndex) {
+        return IntStream.range(0, pole.length)
+                .mapToObj(x -> x == zvyraznenyIndex ? "<b><em>" + pole[x] + "</em></b>" : pole[x] + "")
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
+
+    public final String getPseudokod() {
+        return IntStream.range(0, pseudokod.length)
+                .mapToObj(x -> x == zvyraznenyIndexPseudokodu ? "<b><em>" + pseudokod[x] + "</em></b>" : pseudokod[x] + "")
+                .collect(Collectors.joining("<br>"));
+    }
+
+    protected final void pridejKomentar(String komentar) {
         komentareKroku.add(getKrok() + ". " + komentar);
     }
 
-    public void krokVpred() {
+    public final void krokVpred() {
+        provedKrok();
+        zvyrazniPseudokod();
+    }
+
+    protected void provedKrok() {
+    }
+
+    protected void zvyrazniPseudokod() {
     }
 
     public void naKonec() {
     }
 
-    public int[] getPosloupnost() {
+    public final int[] getPosloupnost() {
         return posloupnost;
     }
 
-    public int getPrvek() {
+    public final int getPrvek() {
         return prvek;
     }
 
-    public String getNazev() {
+    public final String getNazev() {
         return nazev;
     }
 
-    public int getKrok() {
+    public final int getKrok() {
         return komentareKroku.size();
     }
 
-    public List<String> getKomentareKroku() {
+    public final List<String> getKomentareKroku() {
         return komentareKroku;
-    }
-
-    public String[] getPseudokod() {
-        return pseudokod;
     }
 }

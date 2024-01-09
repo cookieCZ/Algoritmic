@@ -21,6 +21,7 @@ public class GUIvolba extends javax.swing.JFrame {
     private List<String> volby = List.of("Binární hledání", "Lineární hledání");
     private final int velikostPole = 10;
     private final int maxPrvek = 100;
+    private boolean chyba =false;
 
     /**
      * Creates new form GUIvolba
@@ -98,7 +99,7 @@ public class GUIvolba extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int prvek = 0;
+        int prvek;
         String input = jTextFieldPrvek.getText();
         if (input.isBlank()) {
             Random random = new Random();
@@ -108,7 +109,8 @@ public class GUIvolba extends javax.swing.JFrame {
                 prvek = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Nesprávný formát hledaného prvku. Zadejte číslo.", "Chyba", JOptionPane.ERROR_MESSAGE);
-                this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+                //this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+                return;
             }
         }
 
@@ -122,11 +124,17 @@ public class GUIvolba extends javax.swing.JFrame {
                 try {
                     return Integer.parseInt(x);
                 } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "Nesprávný formát posloupnosti. Zadejte čísla ve formátu \"1,2,3,4,5\".", "Chyba", JOptionPane.ERROR_MESSAGE);
-                    this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+                    //JOptionPane.showMessageDialog(this, "Nesprávný formát posloupnosti. Zadejte čísla ve formátu \"1,2,3,4,5\".", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    //this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+                    chyba = true;
                     return 0;
                 }
             }).toArray();
+        }
+
+        if (chyba) {
+            JOptionPane.showMessageDialog(this, "Nesprávný formát posloupnosti. Zadejte čísla ve formátu \"1,2,3,4,5\".", "Chyba", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         Algoritmus alg = null;
