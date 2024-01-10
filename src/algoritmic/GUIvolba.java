@@ -5,7 +5,6 @@
  */
 package algoritmic;
 
-import java.awt.event.WindowEvent;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -19,9 +18,9 @@ import javax.swing.JOptionPane;
 public class GUIvolba extends javax.swing.JFrame {
 
     private List<String> volby = List.of("Binární hledání", "Lineární hledání");
-    private final int velikostPole = 10;
-    private final int maxPrvek = 100;
-    private boolean chyba =false;
+    private final int POCET_PRVKU = 10;
+    private final int MAX_PRVEK = 100;
+    private boolean chyba;
 
     /**
      * Creates new form GUIvolba
@@ -103,7 +102,7 @@ public class GUIvolba extends javax.swing.JFrame {
         String input = jTextFieldPrvek.getText();
         if (input.isBlank()) {
             Random random = new Random();
-            prvek = random.nextInt(this.maxPrvek);
+            prvek = random.nextInt(this.MAX_PRVEK);
         } else {
             try {
                 prvek = Integer.parseInt(input);
@@ -114,11 +113,12 @@ public class GUIvolba extends javax.swing.JFrame {
             }
         }
 
+        chyba = false;
         int[] posloupnost;
         input = jTextFieldPosloupnost.getText();
         if (input.isBlank()) {
             Random random = new Random();
-            posloupnost = IntStream.range(0, this.velikostPole).map(x -> random.nextInt(this.maxPrvek)).toArray();
+            posloupnost = IntStream.range(0, this.POCET_PRVKU).map(x -> random.nextInt(this.MAX_PRVEK)).toArray();
         } else {
             posloupnost = Arrays.stream(input.split(",")).map(String::trim).mapToInt(x -> {
                 try {
