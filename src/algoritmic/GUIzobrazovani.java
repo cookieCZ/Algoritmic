@@ -31,12 +31,16 @@ public class GUIzobrazovani extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.algoritmus = algoritmus;
         nadpisLabel.setText(this.algoritmus.getNazev());
+        naZacatekButton.setText("<html>&#9668;&#9668;</html>");
+        krokVzadButton.setText("<html>&#9668;</html>");
+        krokVpredButton.setText("<html>&#9658;</html>");
+        naKonecButton.setText("<html>&#9658;&#9658;</html>");
         aktualizujGUI();
     }
 
     private void aktualizujGUI() {
         pseudokodLabel.setText("<html>" + this.algoritmus.getPseudokod() + "</html>");
-        krokyLabel.setText("<html>" + algoritmus.getKomentareKroku().stream().collect(Collectors.joining("<br>")) + "</html>");
+        krokyLabel.setText("<html>" + algoritmus.getKomentareKroku() + "</html>");
     }
 
     /**

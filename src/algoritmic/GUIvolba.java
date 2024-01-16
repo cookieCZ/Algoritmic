@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
 public class GUIvolba extends javax.swing.JFrame {
 
     private List<String> volby = List.of("Binární hledání", "Lineární hledání");
-    private final int POCET_PRVKU = 10;
-    private final int MAX_PRVEK = 100;
+    private int POCET_PRVKU = 10;//5-20
+    private int MAX_PRVEK = 100;//10-100
     private boolean chyba;
 
     /**
@@ -45,6 +45,11 @@ public class GUIvolba extends javax.swing.JFrame {
         jTextFieldPosloupnost = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldPrvek = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        pocetPrvkuSlider = new javax.swing.JSlider();
+        maxPrvekSlider = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,7 +63,30 @@ public class GUIvolba extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("     Zadejte posloupnost čísel oddělených čárkou nebo nechte prázdné pro vygenerování náhodné posloupnosti     ");
 
-        jLabel2.setText("hledaný prvek (nechte prázdné pro náhodný):");
+        jLabel2.setText("Hledaný prvek (nechte prázdné pro náhodný):");
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Parametry náhodného generování");
+
+        jLabel4.setText("Počet prvků v posloupnosti:");
+
+        jLabel5.setText("Maximální velikost prvků:");
+
+        pocetPrvkuSlider.setMajorTickSpacing(1);
+        pocetPrvkuSlider.setMaximum(20);
+        pocetPrvkuSlider.setMinimum(5);
+        pocetPrvkuSlider.setMinorTickSpacing(1);
+        pocetPrvkuSlider.setPaintLabels(true);
+        pocetPrvkuSlider.setPaintTicks(true);
+        pocetPrvkuSlider.setValue(10);
+
+        maxPrvekSlider.setMajorTickSpacing(10);
+        maxPrvekSlider.setMinimum(10);
+        maxPrvekSlider.setMinorTickSpacing(1);
+        maxPrvekSlider.setPaintLabels(true);
+        maxPrvekSlider.setPaintTicks(true);
+        maxPrvekSlider.setToolTipText("");
+        maxPrvekSlider.setValue(100);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,14 +97,23 @@ public class GUIvolba extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldPosloupnost)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldPrvek)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pocetPrvkuSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(maxPrvekSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,6 +128,16 @@ public class GUIvolba extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldPrvek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pocetPrvkuSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(maxPrvekSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -98,6 +145,9 @@ public class GUIvolba extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MAX_PRVEK = maxPrvekSlider.getValue();
+        POCET_PRVKU = pocetPrvkuSlider.getValue();
+
         int prvek;
         String input = jTextFieldPrvek.getText();
         if (input.isBlank()) {
@@ -192,7 +242,12 @@ public class GUIvolba extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextFieldPosloupnost;
     private javax.swing.JTextField jTextFieldPrvek;
+    private javax.swing.JSlider maxPrvekSlider;
+    private javax.swing.JSlider pocetPrvkuSlider;
     // End of variables declaration//GEN-END:variables
 }

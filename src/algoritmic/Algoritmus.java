@@ -77,7 +77,7 @@ public abstract class Algoritmus {
         return komentareKroku.size();
     }
 
-    public final List<String> getKomentareKroku() {
-        return komentareKroku;
+    public final String getKomentareKroku() {
+        return komentareKroku.stream().collect(Collectors.joining("<br>"));
     }
 }
