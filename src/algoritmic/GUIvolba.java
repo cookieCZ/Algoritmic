@@ -5,10 +5,14 @@
  */
 package algoritmic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +22,6 @@ import javax.swing.JOptionPane;
 public class GUIvolba extends javax.swing.JFrame {
 
     private List<String> volby = List.of("Binární hledání", "Lineární hledání");
-    private int POCET_PRVKU = 10;//5-20
-    private int MAX_PRVEK = 100;//10-100
     private boolean chyba;
 
     /**
@@ -50,6 +52,7 @@ public class GUIvolba extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         pocetPrvkuSlider = new javax.swing.JSlider();
         maxPrvekSlider = new javax.swing.JSlider();
+        duplicityCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +91,9 @@ public class GUIvolba extends javax.swing.JFrame {
         maxPrvekSlider.setToolTipText("");
         maxPrvekSlider.setValue(100);
 
+        duplicityCheckBox.setSelected(true);
+        duplicityCheckBox.setText("povolit duplicitní členy v posloupnosti");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,6 +118,9 @@ public class GUIvolba extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(duplicityCheckBox)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(pocetPrvkuSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(maxPrvekSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -138,24 +147,27 @@ public class GUIvolba extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(maxPrvekSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(duplicityCheckBox)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MAX_PRVEK = maxPrvekSlider.getValue();
-        POCET_PRVKU = pocetPrvkuSlider.getValue();
+        int maxPrvek = maxPrvekSlider.getValue();
+        int pocetPrvku = pocetPrvkuSlider.getValue();
+        boolean duplicity = duplicityCheckBox.isSelected();
 
         int prvek;
         String input = jTextFieldPrvek.getText();
         if (input.isBlank()) {
             Random random = new Random();
-            prvek = random.nextInt(this.MAX_PRVEK);
+            prvek = random.nextInt(maxPrvek);
         } else {
             try {
-                prvek = Integer.parseInt(input);
+                prvek = Integer.parseInt(input.trim());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Nesprávný formát hledaného prvku. Zadejte číslo.", "Chyba", JOptionPane.ERROR_MESSAGE);
                 //this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -163,13 +175,31 @@ public class GUIvolba extends javax.swing.JFrame {
             }
         }
 
-        chyba = false;
         int[] posloupnost;
         input = jTextFieldPosloupnost.getText();
         if (input.isBlank()) {
+            Collection<Integer> c;
+            if (duplicity) {
+                c = new ArrayList();
+            } else {
+                if (maxPrvek < pocetPrvku) {
+                    JOptionPane.showMessageDialog(this, "Posloupnost nelze vygenerovat. Maximální velikost prvku musí být nejméně tolik, kolik je počet prvků v posloupnosti při generování bez duplicit. Vyberte jiná čísla.", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else {
+                    c = new HashSet();
+                }
+            }
+
             Random random = new Random();
-            posloupnost = IntStream.range(0, this.POCET_PRVKU).map(x -> random.nextInt(this.MAX_PRVEK)).toArray();
+            while (c.size() < pocetPrvku) {
+                c.add(random.nextInt(maxPrvek));
+            }
+
+            List<Integer> l = c.stream().collect(Collectors.toCollection(ArrayList::new));
+            Collections.shuffle(l);
+            posloupnost = l.stream().mapToInt(Integer::intValue).toArray();
         } else {
+            chyba = false;
             posloupnost = Arrays.stream(input.split(",")).map(String::trim).mapToInt(x -> {
                 try {
                     return Integer.parseInt(x);
@@ -180,11 +210,11 @@ public class GUIvolba extends javax.swing.JFrame {
                     return 0;
                 }
             }).toArray();
-        }
 
-        if (chyba) {
-            JOptionPane.showMessageDialog(this, "Nesprávný formát posloupnosti. Zadejte čísla ve formátu \"1,2,3,4,5\".", "Chyba", JOptionPane.ERROR_MESSAGE);
-            return;
+            if (chyba) {
+                JOptionPane.showMessageDialog(this, "Nesprávný formát posloupnosti. Zadejte čísla ve formátu \"1,2,3,4,5\".", "Chyba", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         Algoritmus alg = null;
@@ -238,6 +268,7 @@ public class GUIvolba extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox duplicityCheckBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
