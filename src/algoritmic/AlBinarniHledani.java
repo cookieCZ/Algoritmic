@@ -22,7 +22,7 @@ public class AlBinarniHledani extends Algoritmus {
 
     public AlBinarniHledani(int[] posloupnost, int prvek) {
         super(posloupnost, prvek);
-        this.nazev = "Binární hledání";
+        this.nazev = "Binární vyhledávání";
         this.pseudokod = new String[]{
             "seřaď",
             "porovnej prostřední",

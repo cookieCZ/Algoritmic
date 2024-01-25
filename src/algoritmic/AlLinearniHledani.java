@@ -19,7 +19,7 @@ public class AlLinearniHledani extends Algoritmus {
 
     public AlLinearniHledani(int[] posloupnost, int prvek) {
         super(posloupnost, prvek);
-        this.nazev = "Lineární hledání";
+        this.nazev = "Lineární vyhledávání";
         this.pseudokod = new String[]{
             "porovnej",
             "když nerovná",

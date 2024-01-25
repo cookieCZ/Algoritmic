@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class GUIvolba extends javax.swing.JFrame {
 
-    private List<String> volby = List.of("Binární hledání", "Lineární hledání");
+    private List<String> volby = List.of("Binární vyhledávání", "Lineární vyhledávání");
     private boolean chyba;
 
     /**
