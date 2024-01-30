@@ -30,7 +30,7 @@ public class Algoritmic {
                 UIManager.setLookAndFeel(l.getClassName());
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(GUIvolba.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Algoritmic.class.getName()).log(Level.SEVERE, null, ex);
         }
         new GUIvolba().setVisible(true);
     }
