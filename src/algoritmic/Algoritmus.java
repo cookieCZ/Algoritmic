@@ -33,13 +33,13 @@ public abstract class Algoritmus {
 
     protected final String posloupnostToString(int[] pole, int zvyraznenyIndex) {
         return IntStream.range(0, pole.length)
-                .mapToObj(x -> x == zvyraznenyIndex ? "<b><em>" + pole[x] + "</em></b>" : pole[x] + "")
+                .mapToObj(x -> x == zvyraznenyIndex ? "<b><em>" + pole[x] + " </em></b>" : pole[x] + "")
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
     public final String getPseudokod() {
         return IntStream.range(0, pseudokod.length)
-                .mapToObj(x -> x == zvyraznenyIndexPseudokodu ? "<b><em>" + pseudokod[x] + "</em></b>" : pseudokod[x] + "")
+                .mapToObj(x -> x == zvyraznenyIndexPseudokodu ? "<b><em>" + pseudokod[x] + "&ensp;</em></b>" : pseudokod[x] + "")
                 .collect(Collectors.joining("<br>"));
     }
 

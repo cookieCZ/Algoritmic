@@ -24,7 +24,7 @@ public class Algoritmic {
      */
     public static void main(String[] args) {
         try {
-            Optional<LookAndFeelInfo> o = Arrays.stream(UIManager.getInstalledLookAndFeels()).filter(x -> x.getName().equals("Nimbus")).findAny();
+            Optional<LookAndFeelInfo> o = Arrays.stream(UIManager.getInstalledLookAndFeels()).filter(x -> x.getName().equals("Windows")).findAny();
             if (o.isPresent()) {
                 LookAndFeelInfo l = (LookAndFeelInfo) o.get();
                 UIManager.setLookAndFeel(l.getClassName());

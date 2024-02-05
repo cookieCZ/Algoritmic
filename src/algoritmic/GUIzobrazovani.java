@@ -113,6 +113,7 @@ public class GUIzobrazovani extends javax.swing.JFrame {
 
         getContentPane().add(ovladaniPanel, java.awt.BorderLayout.PAGE_END);
 
+        nadpisLabel.setBackground(new java.awt.Color(255, 227, 187));
         nadpisLabel.setFont(new java.awt.Font("Tahoma", 0, 72)); // NOI18N
         nadpisLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nadpisLabel.setText("Pokus");

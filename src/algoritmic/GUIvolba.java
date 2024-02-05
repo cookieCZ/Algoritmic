@@ -65,6 +65,7 @@ public class GUIvolba extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.GridLayout(2, 1));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("     Zadejte posloupnost čísel oddělených čárkou (nechte prázdné pro vygenerování náhodné posloupnosti):   ");
         jPanel4.add(jLabel1);
@@ -76,6 +77,7 @@ public class GUIvolba extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 3));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Hledaný prvek (nechte prázdné pro náhodný):");
         jPanel1.add(jLabel2);
 
@@ -83,9 +85,11 @@ public class GUIvolba extends javax.swing.JFrame {
         prvekTextField.setPreferredSize(new java.awt.Dimension(50, 20));
         jPanel1.add(prvekTextField);
 
+        volbyComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         volbyComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pokus" }));
         jPanel1.add(volbyComboBox);
 
+        zobrazButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         zobrazButton.setText("zobraz");
         zobrazButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +100,7 @@ public class GUIvolba extends javax.swing.JFrame {
 
         jPanel5.add(jPanel1);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Parametry náhodného generování");
         jPanel5.add(jLabel3);
@@ -104,6 +109,7 @@ public class GUIvolba extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Počet prvků v posloupnosti:");
         jPanel2.add(jLabel4);
 
@@ -122,6 +128,7 @@ public class GUIvolba extends javax.swing.JFrame {
 
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("    Maximální velikost prvků:");
         jPanel3.add(jLabel5);
 
@@ -138,6 +145,7 @@ public class GUIvolba extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3);
 
+        duplicityCheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         duplicityCheckBox.setSelected(true);
         duplicityCheckBox.setText("povolit duplicitní členy v posloupnosti");
         duplicityCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
