@@ -52,14 +52,11 @@ public abstract class Algoritmus {
         zvyrazniPseudokod();
     }
 
-    protected void provedKrok() {
-    }
+    protected abstract void provedKrok();
 
-    protected void zvyrazniPseudokod() {
-    }
+    protected abstract void zvyrazniPseudokod();
 
-    public void naKonec() {
-    }
+    public abstract void naKonec();
 
     public final int[] getPosloupnost() {
         return posloupnost;

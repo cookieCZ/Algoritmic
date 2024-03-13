@@ -75,7 +75,7 @@ public class GUIvolba extends javax.swing.JFrame {
 
         jPanel5.setLayout(new java.awt.GridLayout(2, 1));
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 3));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 3));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Hledaný prvek (nechte prázdné pro náhodný):");

@@ -86,9 +86,6 @@ public class AlLinearniHledani extends Algoritmus {
     }
 
     private String arrayToString() {
-        /*return IntStream.range(0, posloupnost.length)
-                .mapToObj(x -> x == zkoumanyIndex ? "<b><em>" + posloupnost[x] + "</em></b>" : posloupnost[x] + "")
-                .collect(Collectors.joining(", ", "[", "]"));*/
         return posloupnostToString(posloupnost, zkoumanyIndex);
     }
 }

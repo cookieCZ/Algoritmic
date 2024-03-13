@@ -118,9 +118,6 @@ public class AlBinarniHledani extends Algoritmus {
     }
 
     private String arrayToString() {
-        /*return IntStream.range(0, aktualniPosloupnost.length)
-                .mapToObj(x -> x == aktualniPosloupnost.length / 2 ? "<b><em>" + aktualniPosloupnost[x] + "</em></b>" : aktualniPosloupnost[x] + "")
-                .collect(Collectors.joining(", ", "[", "]"));*/
         return posloupnostToString(aktualniPosloupnost, aktualniPosloupnost.length / 2);
     }
 }
