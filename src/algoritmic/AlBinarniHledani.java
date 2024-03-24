@@ -21,18 +21,17 @@ public class AlBinarniHledani extends Algoritmus {
     private int dalsiKrok = KROK_SERAD;
 
     public AlBinarniHledani(int[] posloupnost, int prvek) {
-        super(posloupnost, prvek);
-        this.nazev = "Binární vyhledávání";
-        this.pseudokod = new String[]{
-            "seřaď",
-            "porovnej prostřední",
-            "když nerovná",
-            "&ensp;tak když prostřední > hledaný",
-            "&ensp;&ensp;tak vezmi první půlku pole",
-            "&ensp;&ensp;jinak vezmi druhou půlku pole",
-            "&ensp;opakuj od porovnej prostřední",
-            "&ensp;jinak hotovo"
-        };
+        super(posloupnost, prvek, "Binární vyhledávání",
+                new String[]{
+                    "seřaď",
+                    "porovnej prostřední",
+                    "když nerovná",
+                    "&ensp;tak když prostřední > hledaný",
+                    "&ensp;&ensp;tak vezmi první půlku pole",
+                    "&ensp;&ensp;jinak vezmi druhou půlku pole",
+                    "&ensp;opakuj od porovnej prostřední",
+                    "&ensp;jinak hotovo"
+                });
     }
 
     private void serad() {

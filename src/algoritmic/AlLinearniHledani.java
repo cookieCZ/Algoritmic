@@ -18,15 +18,14 @@ public class AlLinearniHledani extends Algoritmus {
     private int dalsiKrok = KROK_POROVNEJ;
 
     public AlLinearniHledani(int[] posloupnost, int prvek) {
-        super(posloupnost, prvek);
-        this.nazev = "Lineární vyhledávání";
-        this.pseudokod = new String[]{
-            "porovnej",
-            "když nerovná",
-            "&ensp;tak přesuň",
-            "&ensp;opakuj od začátku",
-            "&ensp;jinak hotovo"
-        };
+        super(posloupnost, prvek, "Lineární vyhledávání",
+                new String[]{
+                    "porovnej",
+                    "když nerovná",
+                    "&ensp;tak přesuň",
+                    "&ensp;opakuj od začátku",
+                    "&ensp;jinak hotovo"
+                });
     }
 
     private void porovnej() {

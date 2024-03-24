@@ -24,9 +24,11 @@ public abstract class Algoritmus {
     protected String[] pseudokod;
     protected int zvyraznenyIndexPseudokodu = 0;
 
-    public Algoritmus(int[] posloupnost, int prvek) {
+    public Algoritmus(int[] posloupnost, int prvek, String nazev, String[] pseudokod) {
         this.posloupnost = posloupnost;
         this.prvek = prvek;
+        this.nazev = nazev;
+        this.pseudokod = pseudokod;
         this.komentareKroku = new ArrayList();
         this.komentareKroku.add("&emsp;hledaný prvek: " + this.prvek + "&emsp;posloupnost: " + Arrays.toString(this.posloupnost));
     }
