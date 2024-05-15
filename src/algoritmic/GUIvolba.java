@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class GUIvolba extends javax.swing.JFrame {
 
-    private List<String> volby = List.of("Binární vyhledávání", "Lineární vyhledávání");
+    private List<String> volby = List.of("Binární vyhledávání", "Lineární vyhledávání", "Lineární setříděné vyhledávání");
     private boolean chyba;
 
     /**
@@ -223,6 +223,8 @@ public class GUIvolba extends javax.swing.JFrame {
                 alg = new AlBinarniHledani(posloupnost, prvek);
             case 1 ->
                 alg = new AlLinearniHledani(posloupnost, prvek);
+            case 2 ->
+                alg = new AlLinearniSetrideneHledani(posloupnost, prvek);
             default ->
                 throw new IllegalArgumentException("Špatná hodnota přečtena v: GUIvolba.volbyComboBox");
         }
